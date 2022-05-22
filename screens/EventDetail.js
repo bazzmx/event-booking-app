@@ -1,11 +1,6 @@
 /**
  * React Native Event Booking App UI - Event Detail Screnn
  * -> The screen can be seperated 4 sections and 1 fixed bottom bar
- * 
- * TODO:
- * [] Build the description section
- * [] Build the location section (google map in dark mode)
- * [] Build the fixed bottom bar
  */
 import React, { useState, useEffect } from 'react';
 import { Text,
@@ -21,6 +16,7 @@ import moment from 'moment';
 import { LinearGradient } from 'expo-linear-gradient';
 import { dummyData, FONTS, SIZES, COLORS, icons, images } from '../constants';
 import { McText, McIcon, McAvatar } from '../components';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
 const EventDetail = ({ navigation, route }) => {
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -172,10 +168,86 @@ const EventDetail = ({ navigation, route }) => {
             <McText body3>{selectedEvent?.description}</McText>
           </DescriptionSection>
           {/* Ubicación del evento */}
+          <LocationSection>
+            <McText h3>UBICACIÓN</McText>
+            <View
+              style={{
+                height: 250
+              }}
+            >
+              <MapView
+                provider={PROVIDER_GOOGLE}
+                style={{
+                  height: 250,
+                  borderRadius: 30,
+                  marginTop: 20
+                }}
+                minZoonLevel={15}
+                initialRegion={dummyData.Region}
+                customMapStyle={dummyData.MapStyle}
+              >
+              </MapView>
+            </View>
+            <View style={{paddingBottom: 150}}></View>
+          </LocationSection>
       </ScrollView>
+      {/* Barra inferior */}
+      <BottomBarSection>
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginHorizontal: 30
+        }}>
+          <View>
+            <McText body3 style={{ opacity: 0.5, letterSpacing: 1 }}>PRECIO</McText>
+            <View style={{
+              flexDirection: 'row',
+              justifyContent: 'flex-end',
+              alignItems: 'flex-end'
+            }}>
+              <McText h2>€25,00</McText>
+              <McText h3>/entrada</McText>
+            </View>
+          </View>
+          <TouchableOpacity>
+            <LinearGradient
+              colors = {COLORS.linear}
+              start = {{ x: 0, y: 1 }}
+              end = {{ x: 1, y: 1 }}
+              style = {{
+                width: 143,
+                height: 53,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 15
+              }}
+            >
+              <View style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
+                <McText h4>COMPRAR</McText>
+                <McIcon source={icons.buy_ticket} size={24} style={{marginLeft: 11}}></McIcon>
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+      </BottomBarSection>
     </View>
   );
 };
+
+const BottomBarSection = styled.View`
+  height: 130px;
+  width: ${SIZES.width+'px'};
+  border-radius: ${SIZES.radius};
+  background-color: ${COLORS.tabBar}
+  position: absolute;
+  bottom: 0px;
+  justify-content: center;
+`;
 
 const SectionImageHeader = styled.View`
   flex-direction: row;
@@ -207,6 +279,11 @@ const ButtonSection = styled.View`
 const DescriptionSection = styled.View`
   margin: 0px 30px;
 `;
+
+const LocationSection = styled.View`
+   margin: 25px 30px;
+`;
+
 
 const styles = StyleSheet.create({
   ImageBackground: {
