@@ -3,19 +3,46 @@ import { SIZES } from './theme';
 export const Events = [
   {
     id: 1,
-    type: 'CONCERT',
-    title: 'The Weekend',
-    startingTime: '2020/12/21 09:10 PM',
+    type: 'CONCIERTO',
+    title: 'Love of Lesbian',
+    startingTime: '2022/06/21 09:10 PM',
     image: require('../assets/images/event_1.png'),
     description:
       'Non exercitation ullamco reprehenderit incididunt. Officia incididunt id exercitation velit aliqua ut deserunt do non. Aliquip sunt dolor enim occaecat ullamco id consectetur .',
   },
   {
     id: 2,
-    type: 'SHOW',
-    title: 'Firemasters',
-    startingTime: '2020/12/25 08:00 PM',
+    type: 'CONCIERTO',
+    title: 'Björk',
+    startingTime: '2022/07/23 08:00 PM',
     image: require('../assets/images/event_2.png'),
+    description:
+      'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget.',
+  },
+  {
+    id: 3,
+    type: 'MONÓLOGO',
+    title: 'Berto Romero',
+    startingTime: '2022/08/24 08:00 PM',
+    image: require('../assets/images/event_3.png'),
+    description:
+      'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget.',
+  },
+  {
+    id: 4,
+    type: 'CONCIERTO',
+    title: 'Gorillaz',
+    startingTime: '2022/09/25 08:00 PM',
+    image: require('../assets/images/event_4.png'),
+    description:
+      'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget.',
+  },
+  {
+    id: 5,
+    type: 'ESPECTÁCULO',
+    title: 'Cirque du Soleil',
+    startingTime: '2022/10/26 08:00 PM',
+    image: require('../assets/images/event_5.png'),
     description:
       'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget.',
   },
