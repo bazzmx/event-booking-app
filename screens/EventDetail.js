@@ -3,11 +3,6 @@
  * -> The screen can be seperated 4 sections and 1 fixed bottom bar
  * 
  * TODO:
- * [] Build the header image background section
- *    [] Rendering the image background sub section (ImageBackground)
- *    [] Rendering the header sub section
- *    [] Rendering the footer sub section (LinearGradient)
- * [] Build the buttons group section
  * [] Build the description section
  * [] Build the location section (google map in dark mode)
  * [] Build the fixed bottom bar
@@ -143,8 +138,40 @@ const EventDetail = ({ navigation, route }) => {
                 </LinearGradient>
               </SectionImageFooter>
             </View>
-
           </ImageBackground>
+          {/* Agrupación de botones */}
+          <ButtonSection>
+            <TouchableOpacity
+              style={{
+                width: 100,
+                height: 32,
+                borderRadius: 10,
+                marginRight: 16,
+                backgroundColor: COLORS.white,
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <McText h6 style={{color: COLORS.black, letterSpacing: 1}}>ACERCA DE</McText>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                width: 124,
+                height: 32,
+                borderRadius: 10,
+                backgroundColor: COLORS.input,
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <McText h6 style={{opacity:0.5, letterSpacing: 1}}>PARTICIPANTES</McText>
+            </TouchableOpacity>
+          </ButtonSection>
+          {/* Descripción del event */}
+          <DescriptionSection>
+            <McText body3>{selectedEvent?.description}</McText>
+          </DescriptionSection>
+          {/* Ubicación del evento */}
       </ScrollView>
     </View>
   );
@@ -169,6 +196,15 @@ const FooterContentView = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin: 0px 30px;
+`;
+
+const ButtonSection = styled.View`
+  margin: 15px 30px;
+  flex-direction: row;
+`;
+
+const DescriptionSection = styled.View`
   margin: 0px 30px;
 `;
 
