@@ -3,7 +3,6 @@
  * -> The screen can be seperated 4 sections
  * 
  * TODO:
- * [] Build the FEATURED section (Flatlist)
  * [] Build the FOR YOU section 
  */
 import React from 'react';
@@ -13,17 +12,23 @@ import { Text,
   SafeAreaView,
   TextInput,
   FlatList,
-  ImageBackground
+  ImageBackground,
+  TouchableWithoutFeedback
   } from 'react-native';
 import styled from 'styled-components/native';
 import moment from 'moment';
+import { LinearGradient } from 'expo-linear-gradient';
 import { dummyData, FONTS, SIZES, COLORS, icons, images } from '../constants';
 import { McText, McIcon, McAvatar } from '../components';
 
 const Featured = ({ navigation }) => {
-
   const _renderItem = ({item, index}) => {
     return (
+      <TouchableWithoutFeedback
+        onPress={()=>{
+          navigation.navigate('EventDetail', {selectedEvent: item});
+        }}
+      >
       <View style={{
         marginLeft: index === 0 ? 30: 20,
         marginRight: index === dummyData.Events.length -1? 30: 0
@@ -61,9 +66,9 @@ const Featured = ({ navigation }) => {
             <McText body5 style={{opacity: 0.5}}>{item.type}</McText>
             <McText h2>{item.title}</McText>
           </View>
-
         </ImageBackground>
       </View>
+      </TouchableWithoutFeedback>
     )
   }
 
@@ -96,22 +101,55 @@ const Featured = ({ navigation }) => {
       {/* Destacado */}
       <SectionTitle>
         <McText h5>DESTACADO</McText>
+      </SectionTitle>
         <View>
           <FlatList
           horizontal
           contentContainerStyle={{}}
+          showsHorizontalScrollIndicator={false}
           keyExtractor={(item) => 'event_' + item.id}
           data={dummyData.Events}
           renderItem={_renderItem}
           ></FlatList>
         </View>
+      {/* Para ti */}
+      <SectionTitle>
+        <McText h5>PARA TI</McText>
       </SectionTitle>
+        <LinearGradient
+          colors={COLORS.linear}
+          start={{x: 0, y: 1}}
+          end={{x: 1, y: 1}}
+          style={{
+            height:  120,
+            marginHorizontal: 30,
+            borderRadius: SIZES.radius,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <View style={{flexDirection: 'row',
+                        marginHorizontal: 30,
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                      }}>
+            <GiftBox>
+              <View>
+                <McIcon source={icons.gift} size={24}></McIcon>
+              </View>
+            </GiftBox>
+            <View style={{marginLeft: 22}}>
+              <McText h3>¡Tienes una entrada gratuita esperando!</McText>
+              <McText body4 style={{width: 180}}>¡Comparte eventos con tus amigos y gana entradas!</McText>
+            </View>
+          </View>
+        </LinearGradient>
     </SafeAreaView>
   );
 };
 
 const SectionHeader = styled.View`
-  padding: 25px ${SIZES.padding};
+  padding: 16px ${SIZES.padding};
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
@@ -142,6 +180,15 @@ const SectionTitle = styled.View`
 const DateBox = styled.View`
   width: 60px;
   height: 60px;
+  border-radius: 15;
+  background-color: ${COLORS.white};
+  justify-content: center;
+  align-items: center;
+`;
+
+const GiftBox = styled.View`
+  width: 50px;
+  height: 50px;
   border-radius: 15;
   background-color: ${COLORS.white};
   justify-content: center;
