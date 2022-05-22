@@ -38,3 +38,6 @@ MANIFEST
 
 # Model files
 *.h5
+
+# Expo SDK
+.expo/
