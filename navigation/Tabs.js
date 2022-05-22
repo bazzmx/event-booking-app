@@ -56,14 +56,14 @@ const Tabs = ({ params }) => {
       }}
     >
       <Tab.Screen
-        name="Featured"
+        name="Destacado"
         component={Featured}
         options={{
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon={icons.tab_1} />
           ),
           tabBarLabel: ({ focused }) => (
-            <TabLabel focused={focused} text="Featured" />
+            <TabLabel focused={focused} text="Destacado" />
           ),
         }}
       />

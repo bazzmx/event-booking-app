@@ -1,9 +1,6 @@
 /**
  * React Native Event Booking App UI - Featured Screnn
  * -> The screen can be seperated 4 sections
- * 
- * TODO:
- * [] Build the FOR YOU section 
  */
 import React from 'react';
 import { Text,
