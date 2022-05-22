@@ -51,13 +51,126 @@ const EventDetail = ({ navigation, route }) => {
             source={selectedEvent?.image}
             style={{
               width: '100%',
-              height: SIZES.height < 700 ? SIZES.height * 0.4 : SIZES.height * 0.5
+              height: SIZES.height < 700 ? SIZES.height * 0.4 : SIZES.height * 0.5,
             }} 
-          ></ImageBackground>
+          >
+            <View style={{flex: 1}}>
+              {/* Encabezado de la imagen */}
+              <SectionImageHeader>
+                <TouchableOpacity
+                onPress={() => {
+                  navigation.goBack();
+                }}
+                style={{
+                  width: 56,
+                  height: 40,
+                  backgroundColor: 'rgba(0,0,0,0.5)',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 10
+                }}>
+                  <McIcon source={icons.back_arrow} size={24}/>
+                </TouchableOpacity>
+                <View
+                  style={{
+                    width: 96,
+                    height: 40,
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    borderRadius: 10,
+                    flexDirection: 'row'
+                }}>
+                <TouchableOpacity>
+                  <McIcon source={icons.like}
+                    size={24}
+                    style={{
+                      marginLeft: 16,
+                      tinycolor: COLORS.white,
+                    }}
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <McIcon source={icons.share}
+                    size={24}
+                    style={{
+                      marginRight: 16,
+                      tinycolor: COLORS.white,
+                    }}
+                  />
+                </TouchableOpacity>
+                </View>
+              </SectionImageHeader>
+              {/* Pie de página de la imagen */}
+              <SectionImageFooter>
+                <LinearGradient
+                  colors = {['transparent', '#000']}
+                  start = {{x: 0, y: 0}}
+                  end = {{x: 0, y: 1}}
+                  style = {{
+                    width: '100%',
+                    height: 400,
+                    justifyContent: 'flex-end'
+                  }}
+                  >
+                  <FooterContentView>
+                    <View>
+                      <McText body4 style={{ opacity: 0.5, letterSpacing: 2 }}>{selectedEvent?.type}</McText>
+                      <McText h1>{selectedEvent?.title}</McText>
+                      <McText body4 style={{ opacity: 0.5, letterSpacing: 1.5 }}>
+                        COMIENZA {moment(selectedEvent?.startingTime).format('hh:mm A')}</McText>
+                    </View>
+                    <LinearGradient
+                      colors = {COLORS.linear}
+                      start = {{ x: 0, y: 1 }}
+                      end = {{ x: 1, y: 1 }}
+                      style = {{
+                        width: 60,
+                        height: 60,
+                        borderRadius: 15,
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                      }}
+                    >
+                      <McText body4 style={{ letterSpacing: 1 }}>
+                        {moment(selectedEvent?.startingTime).format('MMM').toUpperCase()}
+                      </McText>
+                      <McText h2 style={{}}>
+                        {moment(selectedEvent?.startingTime).format('DD')}
+                      </McText>
+                    </LinearGradient>
+                  </FooterContentView>
+                </LinearGradient>
+              </SectionImageFooter>
+            </View>
+
+          </ImageBackground>
       </ScrollView>
     </View>
   );
 };
+
+const SectionImageHeader = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: ${Platform.OS === 'ios'?'40px':'25px'};
+  margin-left: 30px;
+  margin-right: 30px;
+`;
+
+const SectionImageFooter = styled.View`
+  flex: 1;
+  justify-content: flex-end;
+  position: relative;
+  z-index: -1;
+`;
+
+const FooterContentView = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0px 30px;
+`;
 
 const styles = StyleSheet.create({
   ImageBackground: {
